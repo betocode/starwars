@@ -29,9 +29,12 @@ export default class Index extends Component {
       });
   }
   // pesquisa o planeta definido no input e guarda o resultado no estado
-  findPlanet = e => {
+  findPlanet = async e => {
     e.preventDefault();
-    axios
+    this.setState({
+      movies: []
+    });
+    await axios
       .get(
         `https://cors-anywhere.herokuapp.com/https://swapi.co/api/planets/${
           this.state.searchText
@@ -45,30 +48,28 @@ export default class Index extends Component {
           result: res.data,
           films: res.data.films
         });
-      })
-      .then(
-        axios
-          .all(
-            this.state.films.map(result =>
-              axios.get(result).then(res => {
-                console.log(res.data);
-                // return <Films key={res.data.episode_id} name={res.data.title} />;
-                this.setState({
-                  movies: [...this.state.movies, res.data.title]
-                });
-              })
-            )
-          )
-          .then(
-            this.setState({
-              movies: []
+
+        axios.all(
+          this.state.films.map(result =>
+            axios.get(result).then(res => {
+              console.log(res.data);
+              // return <Films key={res.data.episode_id} name={res.data.title} />;
+              this.setState({
+                movies: [...this.state.movies, res.data.title]
+              });
             })
           )
-      );
+        );
+      });
   };
-
+  stateReset() {
+    if (this.state.movies.length > 0) {
+      this.setState({
+        movies: []
+      });
+    }
+  }
   render() {
-    console.log(this.state);
     return (
       <React.Fragment>
         <div id="main">
