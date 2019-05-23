@@ -1,13 +1,93 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration:none;
+  list-style:none;
+  line-height:1.5;
+  letter-spacing:0.8px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+@font-face {
+  font-family: "starjedi";
+  src: url("./font/PressStart2P-Regular.ttf"); /* IE9 Compat Modes */
+}
+body {
+  font-family: "starjedi";
+  color: yellow;
+}
+#main {
+  min-height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("./images/starwars1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.main__box{
+  width:90%;
+  padding-top:5rem;
+  text-align:center;
+  margin:auto;
+  
+}
+
+.search {
+  margin: auto;
+
+}
+.search h1{
+  font-size:4rem;
+}
+.search input {
+  font-family: "starjedi";
+  padding: 8px;
+  width: 80px;
+  margin: 0 12px;
+}
+.form__group{
+  margin:8px 0px;
+}
+.btn {
+  display: block;
+  width:80%;
+  padding:10px 0px;
+  margin:auto;
+  font-family: "starjedi";
+}
+.btn:hover{
+  background-color:yellow;
+  color:blue;
+}
+h1 {
+  padding: 1rem 0rem;
+  color: yellow;
+}
+.card{
+  background-color:rgba(255,255,255,0.3);
+  width:50%;
+  margin:auto;
+  margin-top:2rem;
+  border-radius:8px;
+ 
+}
+.card__header{
+  padding:5px 0px ;
+  border-bottom:1px solid black;
+}
+.card__body{
+  text-align:left;
+  padding:12px;
+  
+}
+
+@media only screen and (max-width:900px){
+.main__box{
+  padding-top:0.5rem;
+}
+.card{
+  width:100%;
+  font-size:0.8rem;
+}
+
 }
