@@ -10,13 +10,13 @@ export default class Index extends Component {
     result: [],
     films: [],
     quantity: null,
-    movies: []
+    movies: [],
+    loading: true
   };
   changeText = e => {
     this.setState({
       searchText: e.target.value
     });
-    // console.log(this.state.searchText);
   };
   // Define o numero de planetas
   componentDidMount() {
@@ -32,7 +32,8 @@ export default class Index extends Component {
   findPlanet = async e => {
     e.preventDefault();
     this.setState({
-      movies: []
+      movies: [],
+      loading: true
     });
     await axios
       .get(
@@ -41,25 +42,27 @@ export default class Index extends Component {
         }`
       )
       .then(res => {
-        //  console.log(this.state.quantity);
-        // console.log(this.state.searchText);
-        //console.log(res.data);
         this.setState({
           result: res.data,
           films: res.data.films
         });
 
-        axios.all(
-          this.state.films.map(result =>
-            axios.get(result).then(res => {
-              console.log(res.data);
-              // return <Films key={res.data.episode_id} name={res.data.title} />;
-              this.setState({
-                movies: [...this.state.movies, res.data.title]
-              });
-            })
+        axios
+          .all(
+            this.state.films.map(result =>
+              axios.get(result).then(res => {
+                console.log(res.data);
+                this.setState({
+                  movies: [...this.state.movies, res.data.title]
+                });
+              })
+            )
           )
-        );
+          .then(
+            this.setState({
+              loading: false
+            })
+          );
       });
   };
   stateReset() {
@@ -86,6 +89,7 @@ export default class Index extends Component {
                 <Intro />
               ) : (
                 <SearchResult
+                  loading={this.state.loading}
                   result={this.state.result}
                   movies={this.state.movies}
                 />

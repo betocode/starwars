@@ -2,10 +2,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  text-decoration:none;
-  list-style:none;
-  line-height:1.5;
-  letter-spacing:0.8px;
+  text-decoration: none;
+  list-style: none;
+  line-height: 1.5;
+  letter-spacing: 0.8px;
 }
 
 @font-face {
@@ -24,70 +24,89 @@ body {
   background-size: cover;
   background-position: center;
 }
-.main__box{
-  width:90%;
-  padding-top:5rem;
-  text-align:center;
-  margin:auto;
-  
+.main__box {
+  width: 90%;
+  padding-top: 5rem;
+  text-align: center;
+  margin: auto;
 }
 
 .search {
   margin: auto;
+  text-shadow: -1px 0 yellow, 0 1px yellow, 1px 0 yellow, 0 -1px yellow;
+  color: black;
+}
+.search h1 {
+  font-size: 4rem;
+  text-shadow: -1px 0 yellow, 0 1px yellow, 1px 0 yellow, 0 -1px yellow;
+  color: black;
+}
 
-}
-.search h1{
-  font-size:4rem;
-}
-.search input {
-  font-family: "starjedi";
-  padding: 8px;
-  width: 80px;
-  margin: 0 12px;
-}
-.form__group{
-  margin:8px 0px;
+.form__group {
+  margin: 8px 0px;
 }
 .btn {
   display: block;
-  width:80%;
-  padding:10px 0px;
-  margin:auto;
+  width: 80%;
+  padding: 10px 0px;
+  margin: auto;
   font-family: "starjedi";
+  background-color: black;
+  border: 1px solid yellow;
+  color: yellow;
+  transition: all 400ms ease;
 }
-.btn:hover{
-  background-color:yellow;
-  color:blue;
+.btn:hover {
+  background-color: yellow;
+  color: black;
+}
+#form__input {
+  background-color: black;
+  border: 1px solid yellow;
+  color: yellow;
+  width: 80px;
+  font-size: 1rem;
+  padding: 2px 2px;
+  margin: 0 12px;
+  border-radius: 4px;
 }
 h1 {
   padding: 1rem 0rem;
   color: yellow;
 }
-.card{
-  background-color:rgba(255,255,255,0.3);
-  width:50%;
-  margin:auto;
-  margin-top:2rem;
-  border-radius:8px;
- 
+.card {
+  background-color: rgba(255, 255, 255, 0.3);
+  width: 50%;
+  margin: auto;
+  margin-top: 2rem;
+  border-radius: 8px;
 }
-.card__header{
-  padding:5px 0px ;
-  border-bottom:1px solid black;
+.card ul li {
+  padding: 0.2rem 0;
 }
-.card__body{
-  text-align:left;
-  padding:12px;
-  
+.card__header {
+  padding: 5px 0px;
+  border-bottom: 2px solid black;
 }
-
-@media only screen and (max-width:900px){
-.main__box{
-  padding-top:0.5rem;
+.card__body {
+  text-align: left;
+  padding: 12px;
 }
-.card{
-  width:100%;
-  font-size:0.8rem;
+.card__footer {
+  border-top: 2px solid black;
+  padding: 8px 0px;
 }
 
+@media only screen and (max-width: 900px) {
+  .main__box {
+    padding-top: 0.5rem;
+  }
+  .card {
+    width: 100%;
+    font-size: 0.7rem;
+  }
+  .card h1,
+  .card h2 {
+    font-size: 1.5rem;
+  }
 }

@@ -3,11 +3,8 @@ import React from "react";
 const Intro = () => {
   return (
     <div className="intro">
-      <h1>Bem vindo ao StarWars Planet Finder</h1>
-      <p>
-        Digite o nome do planeta do universo StarWars que você deseja obter
-        informções
-      </p>
+      <h1>Welcome to StarWars Planet Finder</h1>
+      <p>Discover information about planets from the StarWars Universe!</p>
     </div>
   );
 };
