@@ -10,7 +10,12 @@ const SearchResult = props => {
         </div>
         <div className="card__body">
           <ul>
-            <li>POPULATION:{result.population}</li>
+            <li>
+              POPULATION:
+              {result.population === "unknown"
+                ? result.population
+                : result.population / Math.pow(10, 6) + " million"}{" "}
+            </li>
             <li>CLIMATE:{result.climate}</li>
             <li>TERRAIN:{result.terrain}</li>
           </ul>
