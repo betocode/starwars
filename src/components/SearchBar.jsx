@@ -1,7 +1,7 @@
 import React from "react";
 
 const SearchBar = props => {
-  const { finder, quantity, change } = props;
+  const { finder, quantity, change, disabled } = props;
   return (
     <React.Fragment>
       <div className="search">
@@ -17,13 +17,13 @@ const SearchBar = props => {
             </label>
             <input
               id="form__input"
-              onBlur={change}
+              onChange={change}
               type="number"
               min="1"
               max={quantity}
             />
           </div>
-          <button type="Submit" className="btn">
+          <button disabled={disabled} type="Submit" className="btn">
             SEARCH
           </button>
         </form>

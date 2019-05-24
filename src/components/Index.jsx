@@ -11,13 +11,15 @@ export default class Index extends Component {
     films: [],
     quantity: null,
     movies: [],
-    loading: true
+    loading: true,
+    disabled: false
   };
 
   // Coleta o valor de referencia do planeta
   changeText = e => {
     this.setState({
-      searchText: e.target.value
+      searchText: e.target.value,
+      disabled: false
     });
   };
 
@@ -41,7 +43,8 @@ export default class Index extends Component {
     // Reseta a array de filmes obtidos pela consulta e reseta o loading
     this.setState({
       movies: [],
-      loading: true
+      loading: true,
+      disabled: true
     });
     await axios
       .get(
@@ -85,6 +88,7 @@ export default class Index extends Component {
                 finder={this.findPlanet.bind(this)}
                 change={this.changeText.bind(this)}
                 quantity={this.state.quantity}
+                disabled={this.state.disabled}
               />
             </div>
             <div id="search_result" className="result">
