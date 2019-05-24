@@ -74,9 +74,9 @@ export default class Index extends Component {
           )
           //após obter todas as informações, mudar o loading e remover a classe com a animação e sortear um novo número
           .then(() => {
-            let min = 1;
+            let min = 0;
             let max = this.state.quantity;
-            let secondRandom = Math.floor(Math.random() * (+max - +min)) + +min;
+            let secondRandom = Math.ceil(Math.random() * (+max - +min)) + +min;
             setTimeout(() => {
               search.classList.remove("show__result");
               button.innerText = "GET PLANET!";
