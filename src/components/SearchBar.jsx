@@ -1,34 +1,35 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class SearchBar extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    const { finder, quantity, change } = this.props;
-    return (
-      <React.Fragment>
-        <div className="search">
-          <h1>Star Wars</h1>
-          <form onSubmit={finder}>
-            <div className="form__group">
-              <label>
-                Type in the planet from StarWars Universe from 1 to {quantity}
-              </label>
-              <input
-                id="form__input"
-                onBlur={change}
-                type="number"
-                min="1"
-                max={quantity}
-              />
-            </div>
-            <button type="Submit" className="btn">
-              SEARCH
-            </button>
-          </form>
+const SearchBar = props => {
+  const { finder, quantity, change } = props;
+  return (
+    <React.Fragment>
+      <div className="search">
+        <div id="div1">
+          <div id="div2">
+            <h1>Star Wars</h1>
+          </div>
         </div>
-      </React.Fragment>
-    );
-  }
-}
+        <form onSubmit={finder}>
+          <div className="form__group">
+            <label>
+              Type in the planet from StarWars Universe from 1 to {quantity}
+            </label>
+            <input
+              id="form__input"
+              onBlur={change}
+              type="number"
+              min="1"
+              max={quantity}
+            />
+          </div>
+          <button type="Submit" className="btn">
+            SEARCH
+          </button>
+        </form>
+      </div>
+    </React.Fragment>
+  );
+};
+
+export default SearchBar;

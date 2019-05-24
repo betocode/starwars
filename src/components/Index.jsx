@@ -13,11 +13,14 @@ export default class Index extends Component {
     movies: [],
     loading: true
   };
+
+  // Coleta o valor de referencia do planeta
   changeText = e => {
     this.setState({
       searchText: e.target.value
     });
   };
+
   // Define o numero de planetas
   componentDidMount() {
     axios
@@ -28,9 +31,14 @@ export default class Index extends Component {
         });
       });
   }
-  // pesquisa o planeta definido no input e guarda o resultado no estado
+
+  // Pesquisa o planeta definido no input e guarda o resultado no estado
   findPlanet = async e => {
+    // Adiciona a classe show__result e remove ela assim que recebe o ultimo
+    const search = document.getElementById("search_result");
+    search.classList.add("show__result");
     e.preventDefault();
+    // Reseta a array de filmes obtidos pela consulta e reseta o loading
     this.setState({
       movies: [],
       loading: true
@@ -46,32 +54,27 @@ export default class Index extends Component {
           result: res.data,
           films: res.data.films
         });
-
+        // Logo após obter o resultado da consulta do planeta, realizar um map para consultar cada endpoint contido no estado films
         axios
           .all(
             this.state.films.map(result =>
               axios.get(result).then(res => {
-                console.log(res.data);
                 this.setState({
                   movies: [...this.state.movies, res.data.title]
                 });
               })
             )
           )
-          .then(
+          // logo após obter todas as informações, mudar o loading e remover a classe com a animação
+          .then(() => {
+            search.classList.remove("show__result");
             this.setState({
               loading: false
-            })
-          );
+            });
+          });
       });
   };
-  stateReset() {
-    if (this.state.movies.length > 0) {
-      this.setState({
-        movies: []
-      });
-    }
-  }
+
   render() {
     return (
       <React.Fragment>
@@ -84,7 +87,7 @@ export default class Index extends Component {
                 quantity={this.state.quantity}
               />
             </div>
-            <div className="result">
+            <div id="search_result" className="result">
               {this.state.result.length === 0 ? (
                 <Intro />
               ) : (

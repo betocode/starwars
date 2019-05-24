@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 
 const SearchResult = props => {
   const { result, movies, loading } = props;
+
   return (
     <React.Fragment>
       <div className="card">
