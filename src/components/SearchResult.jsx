@@ -6,26 +6,30 @@ const SearchResult = props => {
   return (
     <React.Fragment>
       <div className="card">
-        <div className="card__header">
-          <h1>{result.name}</h1>
+        <div className="card__header starwars">
+          <h1> {result.name} </h1>
         </div>
         <div className="card__body">
           <ul>
             <li>
-              POPULATION:
-              {result.population === "unknown"
-                ? result.population
-                : result.population / Math.pow(10, 6) + " million"}{" "}
+              POPULATION: 
+              {result.population
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
             </li>
-            <li>CLIMATE:{result.climate}</li>
-            <li>TERRAIN:{result.terrain}</li>
+            <li>CLIMATE: {result.climate}</li>
+            <li>TERRAIN: {result.terrain}</li>
           </ul>
         </div>
-        {loading === true ? (
-          <div>Loading...</div>
-        ) : (
-          <div className="card__footer">
-            <h2>Movies</h2>
+        <div className="card__footer">
+          {result.films.length === 1 ? (
+            <h2 className="starwars">{result.films.length} Movie</h2>
+          ) : (
+            <h2 className="starwars">{result.films.length} Movies</h2>
+          )}
+          {loading === true ? (
+            <div>Loading...</div>
+          ) : (
             <ul>
               {movies.length === 0 ? (
                 <li>Not found in any movie</li>
@@ -33,8 +37,8 @@ const SearchResult = props => {
                 movies.map((item, id) => <li key={id}>{item}</li>)
               )}
             </ul>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </React.Fragment>
   );

@@ -6,21 +6,13 @@ import axios from "axios";
 
 export default class Index extends Component {
   state = {
-    searchText: null,
+    randomNumber: null,
     result: [],
     films: [],
     quantity: null,
     movies: [],
     loading: true,
     disabled: false
-  };
-
-  // Coleta o valor de referencia do planeta
-  changeText = e => {
-    this.setState({
-      searchText: e.target.value,
-      disabled: false
-    });
   };
 
   // Define o numero de planetas
@@ -31,12 +23,23 @@ export default class Index extends Component {
         this.setState({
           quantity: res.data.count
         });
+      })
+      .then(() => {
+        let min = 1;
+        let max = this.state.quantity;
+        let random = Math.floor(Math.random() * (+max - +min)) + +min;
+        this.setState({
+          randomNumber: random
+        });
       });
   }
 
-  // Pesquisa o planeta definido no input e guarda o resultado no estado
+  // Pesquisa o planeta iniciado no componentdidmount
   findPlanet = async e => {
-    // Adiciona a classe show__result e remove ela assim que recebe o ultimo
+    console.log(this.state.randomNumber);
+    const button = document.getElementById("btn");
+    button.innerText = "GATHERING INFO...";
+    // Adiciona a classe show__result com animação
     const search = document.getElementById("search_result");
     search.classList.add("show__result");
     e.preventDefault();
@@ -49,7 +52,7 @@ export default class Index extends Component {
     await axios
       .get(
         `https://cors-anywhere.herokuapp.com/https://swapi.co/api/planets/${
-          this.state.searchText
+          this.state.randomNumber
         }`
       )
       .then(res => {
@@ -57,7 +60,8 @@ export default class Index extends Component {
           result: res.data,
           films: res.data.films
         });
-        // Logo após obter o resultado da consulta do planeta, realizar um map para consultar cada endpoint contido no estado films
+        /* Logo após obter o resultado da consulta do planeta, 
+        realizar um map para consultar cada endpoint contido no estado films */
         axios
           .all(
             this.state.films.map(result =>
@@ -68,12 +72,20 @@ export default class Index extends Component {
               })
             )
           )
-          // logo após obter todas as informações, mudar o loading e remover a classe com a animação
+          //após obter todas as informações, mudar o loading e remover a classe com a animação e sortear um novo número
           .then(() => {
-            search.classList.remove("show__result");
-            this.setState({
-              loading: false
-            });
+            let min = 1;
+            let max = this.state.quantity;
+            let secondRandom = Math.floor(Math.random() * (+max - +min)) + +min;
+            setTimeout(() => {
+              search.classList.remove("show__result");
+              button.innerText = "GET PLANET!";
+              this.setState({
+                loading: false,
+                disabled: false,
+                randomNumber: secondRandom
+              });
+            }, 600);
           });
       });
   };
@@ -82,27 +94,30 @@ export default class Index extends Component {
     return (
       <React.Fragment>
         <div id="main">
-          <div className="main__box">
-            <div>
-              <SearchBar
-                finder={this.findPlanet.bind(this)}
-                change={this.changeText.bind(this)}
-                quantity={this.state.quantity}
-                disabled={this.state.disabled}
-              />
-            </div>
-            <div id="search_result" className="result">
-              {this.state.result.length === 0 ? (
-                <Intro />
-              ) : (
-                <SearchResult
-                  loading={this.state.loading}
-                  result={this.state.result}
-                  movies={this.state.movies}
+          {this.state.quantity === null ? (
+            <div>loading...</div>
+          ) : (
+            <div className="main__box">
+              <div>
+                <SearchBar
+                  finder={this.findPlanet.bind(this)}
+                  quantity={this.state.quantity}
+                  disabled={this.state.disabled}
                 />
-              )}
+              </div>
+              <div id="search_result" className="result">
+                {this.state.result.length === 0 ? (
+                  <Intro />
+                ) : (
+                  <SearchResult
+                    loading={this.state.loading}
+                    result={this.state.result}
+                    movies={this.state.movies}
+                  />
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </React.Fragment>
     );

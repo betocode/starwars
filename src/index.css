@@ -6,32 +6,35 @@
   list-style: none;
   line-height: 1.5;
   letter-spacing: 0.8px;
-  overflow: hidden;
+  letter-spacing: 2px;
+  font-size: 18px;
 }
 
 @font-face {
   font-family: "starjedi";
-  src: url("./font/PressStart2P-Regular.ttf"); /* IE9 Compat Modes */
+  src: url("./font/Slabo27px-Regular.ttf"); /* IE9 Compat Modes */
 }
 body {
   font-family: "starjedi";
   color: yellow;
-  overflow-x: hidden;
+}
+.starwars {
+  text-shadow: -1px 0 yellow, 0 1px yellow, 1px 0 yellow, 0 -1px yellow;
+  color: black;
 }
 
 /* #### index### */
 
 #main {
   min-height: 100vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("./images/starwars1.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("./images/bg1.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
 .main__box {
   width: 90%;
-  padding-top: 5rem;
   text-align: center;
   margin: auto;
 }
@@ -41,42 +44,44 @@ body {
 .search {
   position: relative;
   margin: auto;
-  text-shadow: -1px 0 yellow, 0 1px yellow, 1px 0 yellow, 0 -1px yellow;
-  color: black;
 }
 .search h1 {
-  font-size: 4rem;
-  text-shadow: -1px 0 yellow, 0 1px yellow, 1px 0 yellow, 0 -1px yellow;
-  color: black;
+  font-size: 6rem;
 }
 #div1 {
-  min-height: 100px;
+  max-height: 200px;
   width: 100%;
   margin: auto;
   position: relative;
   perspective: 100px;
+  overflow: hidden;
 }
 #div2 {
   text-align: center;
   width: 100%;
   position: relative;
   -webkit-transform-style: preserve-3d; /* Safari 3-8  */
-  -webkit-transform: rotateX(20deg); /* Safari 3-8  */
+  -webkit-transform: rotateX(30deg); /* Safari 3-8  */
   transform-style: preserve-3d;
-  transform: rotateX(20deg);
+  transform: rotateX(30deg);
 }
-
 .form__group {
   margin: 8px 0px;
+}
+.form__label {
+  font-size: 1.5rem;
 }
 .btn {
   display: block;
   width: 80%;
-  padding: 10px 0px;
-  margin: auto;
+  font-size: 1.2rem;
+  padding: 8px 0px;
+  cursor: pointer;
+  margin: 18px auto;
   font-family: "starjedi";
   background-color: black;
   border: 1px solid yellow;
+  border-radius: 4px;
   color: yellow;
   transition: all 400ms ease;
 }
@@ -85,51 +90,66 @@ body {
   color: black;
 }
 
-#form__input {
-  background-color: black;
-  border: 1px solid yellow;
-  color: yellow;
-  width: 80px;
-  font-size: 1rem;
-  padding: 2px 2px;
-  margin: 0 12px;
-  border-radius: 4px;
-}
 /* ### SearchResult ### */
+
 .card {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.25);
   width: 50%;
   margin: auto;
-  margin-top: 2rem;
   border-radius: 8px;
 }
 .card ul li {
   padding: 0.2rem 0;
 }
 .card__header {
-  padding: 5px 0px;
+  padding: 8px 0px;
   border-bottom: 2px solid black;
+  text-transform: uppercase;
+}
+.card__header h1 {
+  font-size: 2.5rem;
+  letter-spacing: 5px;
 }
 .card__body {
   text-align: left;
   padding: 12px;
+  text-transform: capitalize;
+  border-bottom: 2px solid black;
 }
 .card__footer {
-  border-top: 2px solid black;
   padding: 8px 0px;
 }
+.card__footer h2 {
+  padding: 8px;
+  font-size: 2rem;
+}
 
-.show__result {
-  animation: starwars 1s ease-in forwards;
+/* ### intro ### */
+
+.intro h1 {
+  font-size: 3rem;
+}
+.intro p {
+  font-size: 1.5rem;
 }
 
 /* ### animations ### */
 
+.show__result {
+  animation: starwars 600ms linear forwards;
+}
+
 @keyframes starwars {
   0% {
+    transform: scale(0);
     opacity: 0;
   }
+  50% {
+    transform: scale(0.5);
+    opacity: 0.5;
+  }
   100% {
+    transform: scale(1);
     opacity: 1;
   }
 }
@@ -137,16 +157,33 @@ body {
 /* ### media queries ### */
 
 @media only screen and (max-width: 900px) {
+  .intro h1 {
+    font-size: 1rem;
+  }
+  .intro p {
+    font-size: 0.8rem;
+  }
   .main__box {
     padding-top: 0.5rem;
   }
   .card {
     width: 100%;
-    font-size: 0.7rem;
+  }
+  .form__label {
+    font-size: 1rem !important;
   }
   .card h1,
   .card h2 {
     font-size: 1.5rem;
+  }
+  .card__body ul li {
+    font-size: 0.85rem;
+  }
+  .form__label {
+    font-size: 1.5rem;
+  }
+  .search h1 {
+    font-size: 3.7rem;
   }
   #div2 {
     position: relative;
