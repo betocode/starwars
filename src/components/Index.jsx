@@ -5,7 +5,10 @@ import Intro from "../components/Intro";
 import axios from "axios";
 
 export default class Index extends Component {
-  state = {
+  constructor(props){
+    super(props)
+  
+ this.state = {
     randomNumber: null,
     result: [],
     films: [],
@@ -13,7 +16,16 @@ export default class Index extends Component {
     movies: [],
     loading: true,
     disabled: false
-  };
+  }
+this.makeRandom = this.makeRandom.bind(this)
+}
+  // Define o numero aleatorioda pesquisa
+  makeRandom = () =>{
+    let min = 0;
+    let max = this.state.quantity;
+    let secondRandom = Math.ceil(Math.random() * (+max - +min)) + +min;
+    return secondRandom
+  }
 
   // Define o numero de planetas
   componentDidMount() {
@@ -24,10 +36,9 @@ export default class Index extends Component {
           quantity: res.data.count
         });
       })
+      // gera o primeiro planeta para a consulta
       .then(() => {
-        let min = 1;
-        let max = this.state.quantity;
-        let random = Math.floor(Math.random() * (+max - +min)) + +min;
+        let random = this.makeRandom()
         this.setState({
           randomNumber: random
         });
@@ -37,18 +48,19 @@ export default class Index extends Component {
   // Pesquisa o planeta iniciado no componentdidmount
   findPlanet = async e => {
     console.log(this.state.randomNumber);
+    // Adiciona a classe show__result com animação e muda o texto no butão
     const button = document.getElementById("btn");
     button.innerText = "GATHERING INFO...";
-    // Adiciona a classe show__result com animação
     const search = document.getElementById("search_result");
     search.classList.add("show__result");
     e.preventDefault();
-    // Reseta a array de filmes obtidos pela consulta e reseta o loading
+    // Reseta o estado para adicionar os valores após consulta da API
     this.setState({
       movies: [],
       loading: true,
       disabled: true
     });
+    // Realiza a consulta baseada no estado randomNumber
     await axios
       .get(
         `https://cors-anywhere.herokuapp.com/https://swapi.co/api/planets/${
@@ -73,17 +85,16 @@ export default class Index extends Component {
             )
           )
           //após obter todas as informações, mudar o loading e remover a classe com a animação e sortear um novo número
+          // esse novo número sera guardado para a próxima consulta
           .then(() => {
-            let min = 0;
-            let max = this.state.quantity;
-            let secondRandom = Math.ceil(Math.random() * (+max - +min)) + +min;
+            let random = this.makeRandom()
             setTimeout(() => {
               search.classList.remove("show__result");
               button.innerText = "GET PLANET!";
               this.setState({
                 loading: false,
                 disabled: false,
-                randomNumber: secondRandom
+                randomNumber: random
               });
             }, 600);
           });

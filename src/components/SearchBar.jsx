@@ -12,7 +12,7 @@ const SearchBar = props => {
         </div>
         <form onSubmit={finder}>
           <div className="form__group">
-            <label class="form__label starwars">
+            <label className="form__label starwars">
               Generate one of {quantity} planets from the Star Wars Universe
             </label>
           </div>

@@ -102,7 +102,7 @@ body {
   padding: 0.2rem 0;
 }
 .card__header {
-  padding: 8px 0px;
+  padding: 6px 0px;
   border-bottom: 2px solid black;
   text-transform: uppercase;
 }
@@ -116,11 +116,9 @@ body {
   text-transform: capitalize;
   border-bottom: 2px solid black;
 }
-.card__footer {
-  padding: 8px 0px;
-}
+
 .card__footer h2 {
-  padding: 8px;
+  padding: 6px 0px;
   font-size: 2rem;
 }
 
