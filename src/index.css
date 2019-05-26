@@ -12,7 +12,7 @@
 
 @font-face {
   font-family: "starjedi";
-  src: url("./font/Slabo27px-Regular.ttf"); /* IE9 Compat Modes */
+  src: url("./assets/font/Slabo27px-Regular.ttf"); /* IE9 Compat Modes */
 }
 body {
   font-family: "starjedi";
@@ -28,7 +28,7 @@ body {
 #main {
   min-height: 100vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-    url("./images/bg1.png");
+    url("./assets/images/bg1.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
