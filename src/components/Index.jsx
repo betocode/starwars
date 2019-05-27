@@ -5,27 +5,27 @@ import Intro from "../components/Intro";
 import axios from "axios";
 
 export default class Index extends Component {
-  constructor(props){
-    super(props)
-  
- this.state = {
-    randomNumber: null,
-    result: [],
-    films: [],
-    quantity: null,
-    movies: [],
-    loading: true,
-    disabled: false
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      randomNumber: null,
+      result: [],
+      films: [],
+      quantity: null,
+      movies: [],
+      loading: true,
+      disabled: false
+    };
+    this.makeRandom = this.makeRandom.bind(this);
   }
-this.makeRandom = this.makeRandom.bind(this)
-}
   // Define o numero aleatorioda pesquisa
-  makeRandom = () =>{
+  makeRandom = () => {
     let min = 0;
     let max = this.state.quantity;
     let secondRandom = Math.ceil(Math.random() * (+max - +min)) + +min;
-    return secondRandom
-  }
+    return secondRandom;
+  };
 
   // Define o numero de planetas
   componentDidMount() {
@@ -38,7 +38,7 @@ this.makeRandom = this.makeRandom.bind(this)
       })
       // gera o primeiro planeta para a consulta
       .then(() => {
-        let random = this.makeRandom()
+        let random = this.makeRandom();
         this.setState({
           randomNumber: random
         });
@@ -47,7 +47,6 @@ this.makeRandom = this.makeRandom.bind(this)
 
   // Pesquisa o planeta iniciado no componentdidmount
   findPlanet = async e => {
-    console.log(this.state.randomNumber);
     // Adiciona a classe show__result com animação e muda o texto no butão
     const button = document.getElementById("btn");
     button.innerText = "GATHERING INFO...";
@@ -62,11 +61,7 @@ this.makeRandom = this.makeRandom.bind(this)
     });
     // Realiza a consulta baseada no estado randomNumber
     await axios
-      .get(
-        `https://swapi.co/api/planets/${
-          this.state.randomNumber
-        }`
-      )
+      .get(`https://swapi.co/api/planets/${this.state.randomNumber}`)
       .then(res => {
         this.setState({
           result: res.data,
@@ -87,7 +82,7 @@ this.makeRandom = this.makeRandom.bind(this)
           //após obter todas as informações, mudar o loading e remover a classe com a animação e sortear um novo número
           // esse novo número sera guardado para a próxima consulta
           .then(() => {
-            let random = this.makeRandom()
+            let random = this.makeRandom();
             setTimeout(() => {
               search.classList.remove("show__result");
               button.innerText = "GET PLANET!";
