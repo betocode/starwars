@@ -30,7 +30,7 @@ this.makeRandom = this.makeRandom.bind(this)
   // Define o numero de planetas
   componentDidMount() {
     axios
-      .get(`https://cors-anywhere.herokuapp.com/https://swapi.co/api/planets/`)
+      .get(`https://swapi.co/api/planets/`)
       .then(res => {
         this.setState({
           quantity: res.data.count
@@ -63,7 +63,7 @@ this.makeRandom = this.makeRandom.bind(this)
     // Realiza a consulta baseada no estado randomNumber
     await axios
       .get(
-        `https://cors-anywhere.herokuapp.com/https://swapi.co/api/planets/${
+        `https://swapi.co/api/planets/${
           this.state.randomNumber
         }`
       )
