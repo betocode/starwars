@@ -30,7 +30,7 @@ export default class Index extends Component {
   // Define o numero de planetas
   componentDidMount() {
     axios
-      .get(`https://swapi.co/api/planets/`)
+      .get(`https://cors-anywhere.herokuapp.com/https://swapi.co/api/planets/`)
       .then(res => {
         this.setState({
           quantity: res.data.count
@@ -61,7 +61,11 @@ export default class Index extends Component {
     });
     // Realiza a consulta baseada no estado randomNumber
     await axios
-      .get(`https://swapi.co/api/planets/${this.state.randomNumber}`)
+      .get(
+        `https://cors-anywhere.herokuapp.com/https://swapi.co/api/planets/${
+          this.state.randomNumber
+        }`
+      )
       .then(res => {
         this.setState({
           result: res.data,
